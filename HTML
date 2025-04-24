@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Pay-In</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="./Pay-In_files/bootstrap.min.css">
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%
+        }
+
+        .display-block {
+            display: block;
+        }
+
+        .padding-top-20 {
+            padding-top: 20px;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", Helvetica, Arial, sans-serif !important;
+        }
+
+        body * {
+            box-sizing: border-box
+        }
+
+        .setp {
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .setp-visible {
+            display: block;
+        }
+
+        .setp .box {
+            margin: 0 auto;
+            min-width: 300px;
+            max-width: 520px
+        }
+
+        .setp .box input {
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            height: 36px;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0 10px;
+            text-align: left;
+            margin-bottom: 10px
+        }
+
+        .setp .box input::placeholder {
+            color: #ccc
+        }
+
+        .setp .box input::-webkit-input-placeholder {
+            color: #ccc
+        }
+
+        .setp .box input::-ms-input-placeholder {
+            color: #ccc
+        }
+
+        .btn {
+            width: 80%;
+            max-width: 320px;
+            height: 42px;
+            line-height: 42px;
+            display: block;
+            text-align: center;
+            color: #fff;
+            padding: 0;
+            margin: 10px auto 0;
+        }
+
+        .btn.sub {
+            background: #337ab7
+        }
+
+        .btn.can {
+            background: #7d7d7d
+        }
+
+        .btn:hover {
+            color: #fff;
+            text-decoration: none
+        }
+
+        .btn-copy {
+            margin-left: 8px;
+            display: inline-block;
+            background: #337ab7;
+            color: #fff;
+            padding: 8px;
+            font-size: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+            margin-left: auto;
+        }
+
+        .btn-copy:hover {
+            color: #fff;
+            text-decoration: none
+        }
+
+        h5 {
+            overflow: hidden
+        }
+
+        p:not(.level-2) {
+            font-size: 16px;
+            color: #337ab7;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .level-2 {
+            color: #999;
+            font-size: 12px;
+            margin-top: 8px
+        }
+
+        .navbar {
+            min-height: 0
+        }
+
+        .navbar .tit {
+            margin: 0;
+            color: #fff;
+            background: #528FF0;
+            padding: 15px 0
+        }
+
+        .container-fluid label.text-info,
+        .container-fluid label.text-danger {
+            padding-left: 8px
+        }
+
+        .container-fluid .info-box,
+        .container-fluid .info-tit {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 4px 12px;
+        }
+
+        .container-fluid .info-tit {
+            border-color: transparent
+        }
+
+        .container-fluid .info-box h5,
+        .container-fluid .info-tit h5 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .icon-warn {
+            font-size: 12px;
+            border-radius: 50%;
+            background: #ff4605;
+            color: #fff;
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            text-align: center;
+            line-height: 14px;
+            margin-right: 6px;
+            font-style: unset;
+        }
+
+        .img-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 20px
+        }
+
+        .img-row img {
+            width: 48%;
+            max-width: 320px;
+            height: auto;
+            border: 2px solid #528FF0;
+        }
+
+        #show-big-img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+            left: 0;
+            top: 0;
+            padding-top: 20px;
+            display: none;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.5)
+        }
+
+        #show-big-img img {
+            display: block;
+            width: 90%;
+            margin: 0 auto;
+            max-width: 750px;
+            height: auto
+        }
+
+        .btn-close {
+            position: absolute;
+            right: 30px;
+            top: 30px;
+            font-size: 16px;
+            color: #fff;
+            border: 2px solid #fff;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 50%;
+        }
+
+        h2 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        h2 span {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        #hide-img img {
+            width: 100%;
+            height: 100%
+        }
+
+        .fsize-16 {
+            font-size: 16px;
+            font-weight: 500
+        }
+
+        #order_time {
+            position: absolute;
+            right: 6px;
+            top: 14px;
+            color: #fff
+        }
+
+        .nav {
+            max-width: 544px;
+            height: 60px;
+            line-height: 50px;
+            margin: 10px auto 0px auto;
+            padding: 0px 12px;
+        }
+
+        .nav .contain {
+            display: flex;
+            justify-content: center;
+            background-color: #eaeaea;
+            border-radius: 8px;
+        }
+
+        .nav-item {
+            width: 50%;
+            text-align: center;
+            margin: 5px;
+            color: #848381;
+            font-size: 26px;
+            border-radius: 8px;
+        }
+
+        .nav-active {
+            background-color: #ffffff;
+            color: #ca7441;
+        }
+
+        .pay-methods {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .pay-method {
+            padding-left: .7rem;
+            box-sizing: border-box;
+            width: 5.9rem;
+            height: 1.8rem;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.09);
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .box {
+            position: relative;
+        }
+
+        .box input {
+            width: 100%;
+            height: 30px;
+        }
+
+        .box button {
+            position: absolute;
+            top: 7px;
+            right: 5px;
+            background-color: #337ab7;
+            color: #fff;
+            border-radius: 3px;
+            border: none;
+            outline: none;
+            padding: 0 10px;
+            min-width: 60px;
+            height: 25px;
+            line-height: 25px;
+        }
+
+        #showUtrView {
+            background-color: rgb(51 51 51 / 50%);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            text-align: center;
+            top: 0;
+            padding-top: 20px;
+        }
+
+        #showUtrView img {
+            width: 90%;
+            margin: 2px auto;
+            max-width: 750px;
+            height: auto;
+        }
+
+        #showUtrView .c1 {
+            width: 80%;
+            height: 80%;
+            margin: 40px auto;
+            background: white;
+            border-radius: 20px;
+        }
+
+        #showUtrView .c2 {
+            width: 90%;
+            height: 85%;
+            background: #ddd;
+            margin: auto;
+            overflow: auto;
+            overflow-wrap: break-word;
+        }
+
+        #showUtrView p {
+            display: block;
+            padding: 5px;
+        }
+
+        .logoShow {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .logoShow span {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .logoShow img {
+            width: 30px;
+        }
+
+        #upiParent {
+            padding-top: 5px;
+        }
+
+        .error-icon {
+            color: #D15B47;
+        }
+
+        .success-icon {
+            color: #5cb85c;
+        }
+
+        .centered-icon {
+            margin: 0 auto;
+            width: 100px;
+            height: 100px;
+            font-size: 100px;
+            line-height: 100px;
+            right: 2px;
+        }
+
+        .margin-top-20 {
+            margin-top: 20px;
+        }
+
+        .setp-padding {
+            padding-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .setp .box {
+                min-width: 280px;
+                padding: 0 10px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .img-row img {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+
+        .btn:focus,
+        .box button:focus {
+            outline: 2px solid #337ab7;
+            outline-offset: 2px;
+        }
+
+        .modal {
+            background: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1050;
+        }
+
+        .text-danger-custom {
+            color: #ff0202;
+        }
+
+        .level-2.text-danger-custom {
+            color: #ff0202;
+        }
+
+        .bold-info-span {
+            font-size: 15px;
+            font-weight: bold;
+            color: #00b7e1;
+        }
+
+        .centered-box {
+            margin: 0 auto;
+            max-width: 520px;
+        }
+
+        .centered-info-span {
+            font-size: 18px;
+            display: block;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="setp" id="setp-1">
+        <div class="navbar navbar-default navbar-custom">
+            <h4 class="text-center tit">Pay-In</h4>
+            <span id="order_time">10:00</span>
+        </div>
+
+        <div class="nav">
+            <div class="contain">
+                <nav class="nav-item upi-item nav-active">UPI</nav>
+            </div>
+        </div>
+
+        <div class="centered-box">
+            <h5>
+                <span class="info-span centered-info-span">
+                    <label id="amountLabel" class="text-danger">1710.00</label>
+                </span>
+            </h5>
+        </div>
+
+        <div class="container-fluid highlight" id="bank">
+            <div class="centered-box">
+                <div class="info-box">
+                    <h5 id="upiParent">
+                        <span class="info-span bold-info-span">
+                            UPI ID:<label id="UPILabel" class="text-danger">fsfba00045568@fincarem</label>
+                        </span>
+                        <a class="btn-copy" id="UPICopyBtn" data-clipboard-text="fsfba00045568@fincarem">copy</a>
+                    </h5>
+                </div>
+
+                <div class="box margin-top-20">
+                    <input type="text" 
+                           name="channel_order_2" 
+                           placeholder="Enter UTR" 
+                           maxlength="12" 
+                           oninput="this.value=this.value.replace(/[^\d]/g,'')" 
+                           onchange="this.value=this.value.replace(/[^\d]/g,'')">
+                    <button onclick="submit()">Submit</button>
+                </div>
+
+                <p class="upi-note">Tip: Dont save the UPI, the UPI change every hour. get new UPI every time.</p>
+
+                <p class="level-2 text-danger-custom">
+                    Important reminder: After completing the UPI transaction, please backfill Ref No./UTR No. : UPI Transaction ID/Freecharge: Transaction ID (12digits).
+                </p>
+
+                <div class="text-center margin-top-20">
+                    <p>if you are not able to pay thru the current upi.. please refresh the page and pay with the new upi shown</p>
+                </div>
+
+                <div class="text-center margin-top-20">
+                    Paytm, GPay, BHIM & More
+                </div>
+
+                <div class="text-center margin-top-20">
+                    <div class="logoShow">
+                        <span><img src="./Pay-In_files/logo-1.png" alt="Logo 1"></span>
+                        <span><img src="./Pay-In_files/logo-4.png" alt="Logo 4"></span>
+                        <span><img src="./Pay-In_files/logo-5.png" alt="Logo 5"></span>
+                        <span><img src="./Pay-In_files/logo-6.png" alt="Logo 6"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="setp padding-top-20" id="setp-2">
+        <div class="centered-icon">
+            <span class="glyphicon glyphicon-ok-sign success-icon"></span>
+        </div>
+        <div class="centered-text-container">
+            <p>Submitted successfully! Please close the current page</p>
+        </div>
+        <div class="error-container hidden">
+            <span class="glyphicon glyphicon-remove-sign error-icon"></span>
+            <p>Invalid Order!</p>
+            <p>Please close the current window</p>
+            <div class="margin-top-center">
+                <a class="btn btn-primary btn-lg" href="javascript:window.close();">close</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="showUtrView" class="hidden">
+        <div class="c1">
+            <p>Tip:</p>
+            <div class="c2">
+                <img src="./Pay-In_files/small1.png" alt="Small image 1">
+                <img src="./Pay-In_files/small2.png" alt="Small image 2">
+                <img src="./Pay-In_files/small3.png" alt="Small image 3">
+                <img src="./Pay-In_files/small4.png" alt="Small image 4">
+                <img src="./Pay-In_files/small5.png" alt="Small image 5">
+            </div>
+            <p id="confirmBtn">Confirm</p>
+        </div>
+    </div>
+
+    <!--[if !IE]> -->
+    <script src="./Pay-In_files/jquery-2.1.4.min.js.download"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script src="./js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="./Pay-In_files/clipboard.min.js.download"></script>
+    <script src="./Pay-In_files/bootstrap-notify.min.js.download"></script>
+    <script src="./Pay-In_files/utils.js.download"></script>
+    <script src="./Pay-In_files/plugins.js.download"></script>
+    <script src="./Pay-In_files/bootbox.js.download"></script>
+    <script src="./Pay-In_files/bootstrap.min.js.download"></script>
+    <script>
+        // Global variables for tracking state
+        let checkAccountInterval;
+        let countDownInterval;
+        let isLoading = false;
+
+        // Improved UTR validation
+        function validateUTR(utr) {
+            // Must be exactly 12 digits
+            return /^\d{12}$/.test(utr.trim());
+        }
+
+        // Enhanced loading handler
+        function loading(show) {
+            if (isLoading === show) return; // Prevent duplicate loading states
+            
+            isLoading = show;
+            if (show) {
+                const html = `
+                    <div class="modal" id="loadingModal">
+                        <div style="width: 200px;height:20px; z-index: 20000; position: absolute; 
+                             text-align: center; left: 50%; top: 50%;margin-left:-100px;margin-top:-10px">
+                            <div class="progress progress-striped active" style="margin-bottom: 0;">
+                                <div class="progress-bar" style="width: 100%;"></div>
+                            </div>
+                            <h5 style="color:#fff">Processing...</h5>
+                        </div>
+                    </div>`;
+                
+                $("#loadingModal").remove();
+                $("body").append(html);
+                $("#loadingModal").modal({backdrop: 'static', keyboard: false});
+            } else {
+                $("#loadingModal").modal('hide').on('hidden.bs.modal', function() {
+                    $(this).remove();
+                });
+            }
+        }
+
+        // Improved error handler
+        function handleError(error) {
+            console.error("Error occurred:", error);
+            $(".error-container").removeClass("hidden");
+            $(".centered-text-container").addClass("hidden");
+            clearIntervals();
+        }
+
+        // Clear all intervals
+        function clearIntervals() {
+            if (checkAccountInterval) clearInterval(checkAccountInterval);
+            if (countDownInterval) clearInterval(countDownInterval);
+        }
+
+        // Enhanced account checking
+        function checkAccount() {
+            if (!sn || (!acc && !upi)) return;
+
+            return $.get("/checkCardValid", {
+                sn: sn,
+                acc: acc,
+                upi: upi,
+            })
+            .then((res) => {
+                if (!res.status) {
+                    clearIntervals();
+                    window.location.reload();
+                }
+            })
+            .catch((error) => {
+                console.error("Error checking account:", error);
+                // Don't reload on error, just log it
+            });
+        }
+
+        // Improved submit function
+        function submit() {
+            const utrInput = $("input[name=channel_order_2]").val();
+            
+            if (!validateUTR(utrInput)) {
+                alert('Invalid UTR format! Please enter exactly 12 digits.');
+                return;
+            }
+            
+            loading(true);
+            
+            $.get("/supplement", {
+                sn: sn,
+                utr: utrInput
+            })
+            .then(result => {
+                loading(false);
+                
+                if (!result.status && !result.isSuc) {
+                    alert(result.msg || "Payment received successfully!");
+                } else {
+                    clearIntervals();
+                    window.location = "suc.html";
+                }
+            })
+            .catch(error => {
+                loading(false);
+                console.error("Error submitting UTR:", error);
+                alert("Server error occurred. Please try again or contact support.");
+            });
+        }
+
+        // Initialize page
+        $(function() {
+            // Initial order fetch
+            $.get("/getOrderBySN", { sn: sn })
+                .then((result) => {
+                    if (result.status && result.data) {
+                        startTime = result.time;
+                        setSearchURL(result.data);
+                        
+                        // Start intervals
+                        countDownInterval = setInterval(countDownHandler, 1000);
+                        checkAccountInterval = setInterval(checkAccount, 10000);
+                        
+                        // Initialize clipboard
+                        const clipboard = new ClipboardJS('.btn-copy');
+                        clipboard.on('success', e => {
+                            alert("Copied successfully!");
+                            e.clearSelection();
+                        });
+                        clipboard.on('error', () => alert('Copy failed!'));
+                        
+                    } else {
+                        handleError(new Error("Invalid order data"));
+                    }
+                })
+                .catch(handleError);
+                
+            // Clean up on page unload
+            $(window).on('unload', clearIntervals);
+        });
+    </script>
+</body>
+</html>
